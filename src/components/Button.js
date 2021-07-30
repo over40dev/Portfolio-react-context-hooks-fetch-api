@@ -20,4 +20,3 @@ Button.propTypes = {
   color: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
 };
-

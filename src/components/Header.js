@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Button from './Button';
+import Tasks from './Tasks';
 
 export default function Header({title}) {
 
