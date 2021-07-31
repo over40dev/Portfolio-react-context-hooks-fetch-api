@@ -1,4 +1,6 @@
-const tasks = [
+import {useState} from 'react';
+
+const mockTasks = [
   {
     id: 1,
     name: 'Task1',
@@ -18,9 +20,12 @@ const tasks = [
 ];
 
 export default function Tasks() {
+
+  const [tasks, setTasks] = useState(mockTasks);
+
   return (
-    <div>
+    <>
       {tasks.map((task) => <h3 key={task.id} className="task">{task.name}</h3>)}
-    </div>
+    </>
   )
 }
