@@ -1,6 +1,6 @@
 import Task from './Task';
 
-export default function Tasks({tasks, onDelete}) {
+export default function Tasks({tasks, onDelete, onToggle}) {
 
   return (
     <>
@@ -8,7 +8,8 @@ export default function Tasks({tasks, onDelete}) {
           <Task 
             key={task.id} 
             task={task}
-            onDelete={onDelete}/>)}
+            onDelete={onDelete}
+            onToggle={onToggle}/>)}
     </>
   )
 }
