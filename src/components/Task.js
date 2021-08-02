@@ -10,7 +10,7 @@ export default function Task({task, onDelete, onToggle}) {
            style={{color: 'red', cursor:'pointer'}}
            onClick={() => onDelete(task.id)}/>
       </h3>
-      <p>{task.date}</p>
+      <p>{task.date.toDateString()} - {task.date.toLocaleTimeString()}</p>
       
     </div>
   )
