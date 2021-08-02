@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import AddTask from './components/AddTask';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 
@@ -8,17 +9,17 @@ function App() {
     {
       id: 1,
       name: 'Task1',
-      date: (new Date(2021, 7, 1)).getDate(),
+      date: (new Date(2021, 7, 1)),
       reminder: true,
     }, {
       id: 2,
       name: 'Task2',
-      date: (new Date(2021, 7, 2)).getDate(),
+      date: (new Date(2021, 7, 2)),
       reminder: false,
     }, {
       id: 3,
       name: 'Task3',
-      date: (new Date(2021, 7, 3)).getDate(),
+      date: (new Date(2021, 7, 3)),
       reminder: true,
     },
   ];
@@ -33,10 +34,10 @@ const toggleReminder = (id) => {
   setTasks(tasks.map(task => task.id === id ? {...task, reminder: !task.reminder} : task));
 }
 
-
   return (
     <div className="container">
       <Header title="Task Tracker"/>
+        <AddTask/>
       {
         tasks.length > 0 ? 
           <Tasks 
