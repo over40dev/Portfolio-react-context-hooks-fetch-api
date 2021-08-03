@@ -33,6 +33,12 @@ function App() {
   // Add Task
   const addTask = (task) => {
     console.log(task);
+    const id = Math.floor(Math.random() * 10000) + 1;
+    console.log(`id = ${id}`);
+    const newTask = {id, ...task};
+    console.log(newTask);
+    setTasks([...tasks, newTask]);
+    console.log(tasks);
   }
 
   // Delete Task

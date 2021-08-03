@@ -2,7 +2,7 @@ import {useState} from 'react';
 
 export default function AddTask({onAdd}) {
 
-  const [text, setText] = useState('');
+  const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [reminder, setReminder] = useState(false);
@@ -11,19 +11,19 @@ export default function AddTask({onAdd}) {
     e.preventDefault();
 
     // if (!text || !date) {
-    if (!text) {
+    if (!name) {
       alert("Please Add Task Information");
       return;
     }
 
     onAdd({
-      text,
+      name,
       date,
       time,
       reminder,
     });
 
-    setText('');
+    setName('');
     setDate('');
     setTime('');
     setReminder(false);
@@ -32,10 +32,10 @@ export default function AddTask({onAdd}) {
   return (
     <form className="add-form" onSubmit={onSubmit}>
       <div className="form-control">
-        <label htmlFor="taskText">Task</label>
+        <label htmlFor="name">Task</label>
         <input 
-          name="taskText" type="text" placeholder="Add Task" 
-          value={text} onChange={(e) => setText(e.target.value)} />
+          name="name" type="text" placeholder="Add Task" 
+          value={name} onChange={(e) => setName(e.target.value)} />
       </div>
       <div className="form-control">
         <label htmlFor="date">Day</label>
