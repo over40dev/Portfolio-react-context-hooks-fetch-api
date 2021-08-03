@@ -8,19 +8,22 @@ function App() {
     {
       id: 1,
       name: 'Task1',
-      date: new Date(2021, 7, 1),
+      date: (new Date(2021, 7, 1)).toDateString(),
+      time: '',
       reminder: true,
     },
     {
       id: 2,
       name: 'Task2',
-      date: new Date(2021, 7, 2),
+      date: (new Date(2021, 7, 2)).toDateString(),
+      time: '19:11',
       reminder: false,
     },
     {
       id: 3,
       name: 'Task3',
-      date: new Date(2021, 7, 3),
+      date: (new Date(2021, 7, 3)).toDateString(),
+      time: '',
       reminder: true,
     },
   ];
@@ -31,7 +34,6 @@ function App() {
   const addTask = (task) => {
     console.log(task);
   }
-  // const addTask = (task) => setTasks({...tasks, task});
 
   // Delete Task
   const deleteTask = (id) => setTasks(tasks.filter((task) => task.id !== id));
