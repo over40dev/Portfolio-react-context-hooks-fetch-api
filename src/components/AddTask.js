@@ -10,7 +10,6 @@ export default function AddTask({onAdd}) {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // if (!text || !date) {
     if (!name) {
       alert("Please Add Task Information");
       return;
