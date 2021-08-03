@@ -8,7 +8,7 @@ export default function Header({title, showForm, onToggleForm}) {
       <h1>{title}</h1>
       <Button 
         text={showForm ? 'Close' : 'Add'}
-        color="green"
+        color={showForm ? 'red' : 'green'}
         handleClick={() => onToggleForm(!showForm)}
         />
     </header>
