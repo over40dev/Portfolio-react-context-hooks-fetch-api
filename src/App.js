@@ -29,16 +29,13 @@ function App() {
   ];
 
   const [tasks, setTasks] = useState(mockTasks);
+  const [showAddTaskForm, setShowAddTaskForm] = useState(false);
 
   // Add Task
   const addTask = (task) => {
-    console.log(task);
     const id = Math.floor(Math.random() * 10000) + 1;
-    console.log(`id = ${id}`);
     const newTask = {id, ...task};
-    console.log(newTask);
     setTasks([...tasks, newTask]);
-    console.log(tasks);
   }
 
   // Delete Task
@@ -55,8 +52,8 @@ function App() {
 
   return (
     <div className="container">
-      <Header title="Task Tracker" />
-      <AddTask onAdd={addTask} />
+      <Header title="Task Tracker" showForm={showAddTaskForm} onToggleForm={setShowAddTaskForm}/>
+      {showAddTaskForm && <AddTask onAdd={addTask} /> }
       {tasks.length > 0 ? (
         <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
       ) : (
