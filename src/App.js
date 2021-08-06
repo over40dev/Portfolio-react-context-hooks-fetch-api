@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import AddTask from './components/AddTask';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
@@ -7,6 +7,17 @@ function App() {
   
   const [tasks, setTasks] = useState([]);
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
+
+useEffect(() => {
+  const fetchTasks = async () => {
+    const res = await fetch('http://localhost:5000/tasks');
+    const data = await res.json();
+
+    console.log(data);
+  }
+
+  fetchTasks();
+}, []);
 
   // Add Task
   const addTask = (task) => {
