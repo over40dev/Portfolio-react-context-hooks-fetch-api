@@ -1,10 +1,123 @@
 # Education - React Example - Basics
 
-## React Hooks, Context, Fetch API
+## React Hooks, Context, Fetch API (Mock Backend with JSON Server)
  
 ### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+### Getting Started with JSON Server
+
+JSON Server is a full mock REST API with zero coding. You can even use your own custom data.
+
+Install Globally or Locally ( `npm install json-server` )
+
+GitHub: [JSON Server](https://github.com/typicode/json-server)
+
+Add Script to **package.json** file such as:
+
+```json
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "server": "json-server --watch db.json --port 5000"
+  },
+```
+
+Your mock data is stored in a file 'db.json' in your main folder. When you first execute 'npm run server', if 'db.json' does not exist it is created for you. The great thing is, you can modify this file to include your own data in your own format so you can easily make it fit your app (rather than making your app fit your data).
+
+Note: It's important to know that this is a 'JSON' file and therefore must adhere to 'JSON' format rules including double quotes ( "" ) around all keys and string values as well as no trailing commas (like you can have in modern JS)
+
+'db.json' file created for you:
+
+```json
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
+```
+
+Modify file for our purposes:
+
+```json
+{
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Task1",
+      "date": "Aug 1, 2021",
+      "time": "",
+      "reminder": true
+    },
+    {
+      "id": 2,
+      "name": "Task2",
+      "date": "Aug 2, 2021",
+      "time": "",
+      "reminder": true
+    },
+    {
+      "id": 3,
+      "name": "Task3",
+      "date": "Aug 3, 2021",
+      "time": "",
+      "reminder": false
+    }
+  ]
+}
+```
+
+Run the 'server' using the 'script' we added to 'package.json'
+
+`npm run server`
+
+The tasks are now available at the port we included in the 'script' command in 'package.json'
+
+`http://localhost:5000/tasks`
+
+Using the browser to hit this url returns the **tasks** we setup in 'db.json'
+
+```default
+[
+  {
+    "id": 1,
+    "name": "Task1",
+    "date": "Aug 1, 2021",
+    "time": "",
+    "reminder": true
+  },
+  {
+    "id": 2,
+    "name": "Task2",
+    "date": "Aug 2, 2021",
+    "time": "",
+    "reminder": true
+  },
+  {
+    "id": 3,
+    "name": "Task3",
+    "date": "Aug 3, 2021",
+    "time": "",
+    "reminder": false
+  }
+]
+```
+
 
 ## Available Scripts
 
@@ -72,3 +185,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+

@@ -1,34 +1,11 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import AddTask from './components/AddTask';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 
 function App() {
-  const mockTasks = [
-    {
-      id: 1,
-      name: 'Task1',
-      date: (new Date(2021, 7, 1)).toDateString(),
-      time: '',
-      reminder: true,
-    },
-    {
-      id: 2,
-      name: 'Task2',
-      date: (new Date(2021, 7, 2)).toDateString(),
-      time: '19:11',
-      reminder: false,
-    },
-    {
-      id: 3,
-      name: 'Task3',
-      date: (new Date(2021, 7, 3)).toDateString(),
-      time: '',
-      reminder: true,
-    },
-  ];
-
-  const [tasks, setTasks] = useState(mockTasks);
+  
+  const [tasks, setTasks] = useState([]);
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
 
   // Add Task
