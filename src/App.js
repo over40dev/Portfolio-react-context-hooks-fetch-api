@@ -17,7 +17,7 @@ useEffect(() => {
   getTasks();
 }, []);
 
-// fetch Tasks
+// Fetch Tasks using Fetch API
 const fetchTasks = async () => {
   const res = await fetch('http://localhost:5000/tasks');
   const data = await res.json();
@@ -34,7 +34,13 @@ const fetchTasks = async () => {
   }
 
   // Delete Task
-  const deleteTask = (id) => setTasks(tasks.filter((task) => task.id !== id));
+  const deleteTask = async (id) => {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'DELETE',
+    });
+
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
 
   // Toggle Reminder
   const toggleReminder = (id) => {
