@@ -25,12 +25,27 @@ const fetchTasks = async () => {
   return data;
 }
 
-
   // Add Task
-  const addTask = (task) => {
-    const id = Math.floor(Math.random() * 10000) + 1;
-    const newTask = {id, ...task};
-    setTasks([...tasks, newTask]);
+  const addTask = async (task) => {
+    /* NEW WAY 
+    - add task on server */
+    const res = await fetch('http://localhost:5000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(task)
+    });
+
+    /* data that is returned is the new task that was added including the ID created on the server. */
+    const data = await res.json();
+    setTasks([...tasks, data]);
+
+    /* OLD WAY 
+    - simulate adding task in UI */
+    // const id = Math.floor(Math.random() * 10000) + 1;
+    // const newTask = {id, ...task};
+    // setTasks([...tasks, newTask]);
   }
 
   // Delete Task
