@@ -8,13 +8,6 @@
       "reminder": true
     },
     {
-      "id": 2,
-      "name": "Task2",
-      "date": "Aug 2, 2021",
-      "time": "",
-      "reminder": true
-    },
-    {
       "id": 3,
       "name": "Task3",
       "date": "Aug 3, 2021",
