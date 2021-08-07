@@ -12,13 +12,13 @@
       "name": "Task3",
       "date": "Aug 3, 2021",
       "time": "",
-      "reminder": false
+      "reminder": true
     },
     {
       "name": "Task4",
       "date": "2021-08-06",
       "time": "23:15",
-      "reminder": true,
+      "reminder": false,
       "id": 4
     },
     {
