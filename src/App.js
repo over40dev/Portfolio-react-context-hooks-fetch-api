@@ -4,37 +4,48 @@ import Header from './components/Header';
 import Tasks from './components/Tasks';
 
 function App() {
-  
   const [tasks, setTasks] = useState([]);
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
 
-useEffect(() => {
-  const getTasks = async () => {
-    const tasksFromServer = await fetchTasks();
-    setTasks(tasksFromServer);
+  const tasksURL = process.env.REACT_APP_TASKS_SERVER_BASE_URL;
+
+  /* Initiates an action at the start of a component.
+  - all other actions are initiated by a change in data */
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasksFromServer = await fetchTasks();
+      setTasks(tasksFromServer);
+    }
+
+    getTasks();
+  }, []);
+
+  // Fetch All Tasks from Server using Fetch API
+  const fetchTasks = async () => {
+    const res = await fetch(tasksURL);
+    const data = await res.json();
+
+    return data;
   }
 
-  getTasks();
-}, []);
+  // Fetch Single Task from Server using Fetch API
+  const fetchTask = async (id) => {
+    const res = await fetch(`${tasksURL}${id}`);
+    const data = await res.json();
 
-// Fetch Tasks using Fetch API
-const fetchTasks = async () => {
-  const res = await fetch('http://localhost:5000/tasks');
-  const data = await res.json();
-
-  return data;
-}
+    return data;
+  }
 
   // Add Task
   const addTask = async (task) => {
     /* NEW WAY 
     - add task on server */
-    const res = await fetch('http://localhost:5000/tasks', {
+    const res = await fetch(tasksURL, {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
       },
-      body: JSON.stringify(task)
+      body: JSON.stringify(task),
     });
 
     /* data that is returned is the new task that was added including the ID created on the server. */
@@ -50,7 +61,7 @@ const fetchTasks = async () => {
 
   // Delete Task
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, {
+    await fetch(`${tasksURL}${id}`, {
       method: 'DELETE',
     });
 
@@ -58,18 +69,40 @@ const fetchTasks = async () => {
   }
 
   // Toggle Reminder
-  const toggleReminder = (id) => {
+  const toggleReminder = async (id) => {
+    const taskToToggle = await fetchTask(id);
+    // taskToToggle.reminder = !taskToToggle.reminder;
+
+    const updatedTask = {
+      ...taskToToggle,
+      reminder: !taskToToggle.reminder
+    }
+
+   const res = await fetch(`${tasksURL}${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(updatedTask),
+    });
+
+    const data = await res.json();
+
     setTasks(
       tasks.map((task) =>
-        task.id === id ? {...task, reminder: !task.reminder} : task,
-      ),
+        task.id === id ? {...task, reminder: data.reminder} : task,
+      )
     );
-  };
+  }
 
   return (
     <div className="container">
-      <Header title="Task Tracker" showForm={showAddTaskForm} onToggleForm={setShowAddTaskForm}/>
-      {showAddTaskForm && <AddTask onAdd={addTask} /> }
+      <Header
+        title="Task Tracker"
+        showForm={showAddTaskForm}
+        onToggleForm={setShowAddTaskForm}
+      />
+      {showAddTaskForm && <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? (
         <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
       ) : (
