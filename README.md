@@ -1,7 +1,11 @@
-# Education - React Example - Basics
+# Portfolio React App - Simple SPA with Routing and Mock Backend
 
-## React Hooks, Context, Fetch API (Mock Backend with JSON Server)
+## React Basics plus Hooks, Context, Fetch API (Mock Backend with JSON Server)
  
+### Source of Coding Challenge
+
+[Traversy Media - YouTube - React JS Crash Course 2021](https://youtu.be/w7ejDZ8SWv8)
+
 ### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -117,7 +121,6 @@ Using the browser to hit this url returns the **tasks** we setup in 'db.json'
   }
 ]
 ```
-
 
 ## Available Scripts
 
