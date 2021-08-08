@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import AddTask from './components/AddTask';
 import Header from './components/Header';
+import Footer from './components/Footer';
+import About from './components/About';
 import Tasks from './components/Tasks';
 
 function App() {
@@ -15,7 +18,7 @@ function App() {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks();
       setTasks(tasksFromServer);
-    }
+    };
 
     getTasks();
   }, []);
@@ -26,7 +29,7 @@ function App() {
     const data = await res.json();
 
     return data;
-  }
+  };
 
   // Fetch Single Task from Server using Fetch API
   const fetchTask = async (id) => {
@@ -34,7 +37,7 @@ function App() {
     const data = await res.json();
 
     return data;
-  }
+  };
 
   // Add Task
   const addTask = async (task) => {
@@ -57,7 +60,7 @@ function App() {
     // const id = Math.floor(Math.random() * 10000) + 1;
     // const newTask = {id, ...task};
     // setTasks([...tasks, newTask]);
-  }
+  };
 
   // Delete Task
   const deleteTask = async (id) => {
@@ -66,7 +69,7 @@ function App() {
     });
 
     setTasks(tasks.filter((task) => task.id !== id));
-  }
+  };
 
   // Toggle Reminder
   const toggleReminder = async (id) => {
@@ -75,10 +78,10 @@ function App() {
 
     const updatedTask = {
       ...taskToToggle,
-      reminder: !taskToToggle.reminder
-    }
+      reminder: !taskToToggle.reminder,
+    };
 
-   const res = await fetch(`${tasksURL}${id}`, {
+    const res = await fetch(`${tasksURL}${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
@@ -91,24 +94,40 @@ function App() {
     setTasks(
       tasks.map((task) =>
         task.id === id ? {...task, reminder: data.reminder} : task,
-      )
+      ),
     );
-  }
+  };
 
   return (
-    <div className="container">
-      <Header
-        title="Task Tracker"
-        showForm={showAddTaskForm}
-        onToggleForm={setShowAddTaskForm}
-      />
-      {showAddTaskForm && <AddTask onAdd={addTask} />}
-      {tasks.length > 0 ? (
-        <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
-      ) : (
-        'No Tasks'
-      )}
-    </div>
+    <Router>
+      <div className="container">
+        <Header
+          title="Task Tracker"
+          showForm={showAddTaskForm}
+          onToggleForm={setShowAddTaskForm}
+        />
+        <Route
+          path="/"
+          exact
+          render={() => (
+            <>
+              {showAddTaskForm && <AddTask onAdd={addTask} />}
+              {tasks.length > 0 ? (
+                <Tasks
+                  tasks={tasks}
+                  onDelete={deleteTask}
+                  onToggle={toggleReminder}
+                />
+              ) : (
+                'No Tasks'
+              )}
+            </>
+          )}
+        />
+        <Route path="/about" component={About} />
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

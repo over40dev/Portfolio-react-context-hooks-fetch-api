@@ -6,7 +6,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### Getting Started with JSON Server
+### Getting Started with JSON Server for Mock Backend
 
 JSON Server is a full mock REST API with zero coding. You can even use your own custom data.
 
